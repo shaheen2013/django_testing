@@ -6,6 +6,16 @@ from .models import Product
 class ProductFilter(filters.FilterSet):
     name = filters.CharFilter(lookup_expr='icontains')
     klass = filters.CharFilter(lookup_expr='icontains')
+    status = filters.CharFilter(method='status_filter')
+
+    def status_filter(self, queryset, name, value):
+        if value == "available":
+            value = 1
+        elif value == "unavailable":
+            value = 2
+        else:
+            value = 0
+        return queryset.filter(status=value)
 
     class Meta:
         model = Product
