@@ -5,7 +5,7 @@ from .models import Product
 # We create filters for each field we want to be able to filter on
 class ProductFilter(filters.FilterSet):
     name = filters.CharFilter(lookup_expr='icontains')
-    klass = filters.CharFilter(lookup_expr='icontains')
+    class_name = filters.CharFilter(lookup_expr='icontains')
     status = filters.CharFilter(method='status_filter')
 
     def status_filter(self, queryset, name, value):
@@ -19,5 +19,5 @@ class ProductFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields = ['name', 'klass', 'status']
+        fields = ['name', 'class_name', 'status']
 
